@@ -10,11 +10,12 @@ import { fetchNotes } from '@/lib/api/notes';
 import type { NoteTag } from '@/types/note';
 
 const PER_PAGE = 12;
+
 const validTags: NoteTag[] = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
 interface FilteredNotesPageProps {
   params: Promise<{
-    slug?: string[];
+    slug: string[];
   }>;
 }
 
@@ -22,7 +23,11 @@ export default async function FilteredNotesPage({
   params,
 }: FilteredNotesPageProps) {
   const { slug } = await params;
-  const selectedTag = slug?.[0] ?? 'all';
+  const selectedTag = slug[0];
+
+  if (!selectedTag) {
+    notFound();
+  }
 
   if (selectedTag !== 'all' && !validTags.includes(selectedTag as NoteTag)) {
     notFound();
