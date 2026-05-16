@@ -5,9 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 
 import Modal from '@/components/Modal/Modal';
 import { fetchNoteById } from '@/lib/api';
-import css from './NotePreview.module.css';
+import css from '@/components/NotePreview/NotePreview.module.css';
 
-export default function NotePreview() {
+export default function NotePreviewClient() {
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const id = params.id;

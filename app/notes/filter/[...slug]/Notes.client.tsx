@@ -12,7 +12,7 @@ import SearchBox from '@/components/SearchBox/SearchBox';
 import { fetchNotes } from '@/lib/api';
 import type { NoteTag } from '@/types/note';
 
-import css from './NotesPage.module.css';
+import css from '@/app/notes/NotesPage.module.css';
 
 const PER_PAGE = 12;
 

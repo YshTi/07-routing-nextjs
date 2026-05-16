@@ -5,9 +5,9 @@ import {
 } from '@tanstack/react-query';
 import { notFound } from 'next/navigation';
 
-import NotesClient from '@/app/notes/Notes.client';
-import { fetchNotes } from '@/lib/api/notes';
+import { fetchNotes } from '@/lib/api';
 import type { NoteTag } from '@/types/note';
+import NotesClient from './Notes.client';
 
 const PER_PAGE = 12;
 
