@@ -9,13 +9,18 @@ import NoteForm from '@/components/NoteForm/NoteForm';
 import Modal from '@/components/Modal/Modal';
 import Pagination from '@/components/Pagination/Pagination';
 import SearchBox from '@/components/SearchBox/SearchBox';
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes } from '@/lib/api/notes';
+import type { NoteTag } from '@/types/note';
 
 import css from './NotesPage.module.css';
 
 const PER_PAGE = 12;
 
-export default function NotesClient() {
+interface NotesClientProps {
+  tag?: NoteTag;
+}
+
+export default function NotesClient({ tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,8 +31,8 @@ export default function NotesClient() {
   }, 500);
 
   const queryKey = useMemo(
-    () => ['notes', page, searchQuery] as const,
-    [page, searchQuery],
+    () => ['notes', page, searchQuery, tag] as const,
+    [page, searchQuery, tag],
   );
 
   const { data, isLoading, isError, error } = useQuery({
@@ -37,6 +42,7 @@ export default function NotesClient() {
         page,
         perPage: PER_PAGE,
         search: searchQuery,
+        tag,
       }),
     placeholderData: keepPreviousData,
   });
